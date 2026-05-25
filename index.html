@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Management Saison 2 — UCO · Valeurs &amp; Talents</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ===== VARIABLES ===== */
+    :root {
+      --ink:       #344552;
+      --ink-light: #5a7082;
+      --white:     #ffffff;
+      --off-white: #f7f8fb;
+      --lavande:   #8D9DCA;
+      --lavande-light: #c4ceea;
+      --lavande-pale:  #edf0f8;
+      --rose:      #e8a0a8;
+      --orange:    #f0a878;
+      --yellow:    #f5d080;
+      --turquoise: #7cc8c0;
+      --border:    #dde3ef;
+      --shadow:    0 4px 24px rgba(52,69,82,.10);
+      --shadow-lg: 0 12px 48px rgba(52,69,82,.16);
+      --radius:    14px;
+      --radius-lg: 24px;
+    }
+
+    /* ===== RESET ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 400;
+      color: var(--ink);
+      background: var(--white);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; }
+    a { color: inherit; }
+
+    /* ===== LAYOUT ===== */
+    .container { max-width: 1080px; margin: 0 auto; padding: 0 28px; }
+    section { padding: 80px 0; }
+    section:nth-child(even) { background: var(--off-white); }
+
+    /* ===== TYPOGRAPHY ===== */
+    h1, h2, h3 { font-family: 'Playfair Display', serif; line-height: 1.2; }
+    h2 { font-size: clamp(1.75rem, 3vw, 2.4rem); color: var(--ink); margin-bottom: 12px; }
+    h3 { font-size: 1.15rem; font-weight: 600; margin-bottom: 8px; }
+    .label {
+      display: inline-block;
+      font-size: .7rem;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--lavande);
+      margin-bottom: 10px;
+    }
+    .section-intro { max-width: 620px; color: var(--ink-light); font-size: 1.05rem; margin-bottom: 48px; }
+
+    /* ===== NAV ===== */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(255,255,255,.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      max-width: 1080px; margin: 0 auto; padding: 14px 28px;
+    }
+    .nav-logo img { height: 40px; object-fit: contain; }
+    .nav-logo span {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      color: var(--ink);
+      letter-spacing: .01em;
+    }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a {
+      font-size: .88rem; font-weight: 500;
+      color: var(--ink-light); text-decoration: none;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--ink); }
+    @media (max-width: 680px) { .nav-links { display: none; } }
+
+    /* ===== HERO ===== */
+    #hero {
+      padding: 100px 0 80px;
+      background: var(--ink);
+      position: relative; overflow: hidden;
+    }
+    #hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 60% at 80% 30%, rgba(141,157,202,.25) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 50% at 10% 80%, rgba(124,200,192,.15) 0%, transparent 55%);
+    }
+    .hero-inner {
+      position: relative; z-index: 1;
+      display: grid; grid-template-columns: 1fr auto;
+      gap: 40px; align-items: center;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(141,157,202,.2);
+      border: 1px solid rgba(141,157,202,.4);
+      border-radius: 100px;
+      padding: 5px 14px;
+      font-size: .75rem; font-weight: 500;
+      color: var(--lavande-light);
+      margin-bottom: 20px;
+    }
+    .hero-badge span { width: 6px; height: 6px; border-radius: 50%; background: var(--turquoise); display: block; }
+    #hero h1 {
+      font-size: clamp(2rem, 4.5vw, 3.4rem);
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+    #hero h1 em { color: var(--lavande-light); font-style: normal; }
+    .hero-sub {
+      font-size: 1.1rem; color: rgba(255,255,255,.65);
+      max-width: 520px; margin-bottom: 36px;
+    }
+    .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 13px 26px; border-radius: 100px;
+      font-size: .9rem; font-weight: 600;
+      text-decoration: none; transition: transform .2s, box-shadow .2s;
+      cursor: pointer; border: none;
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.18); }
+    .btn-primary { background: var(--lavande); color: var(--white); }
+    .btn-outline { background: transparent; color: var(--white); border: 1.5px solid rgba(255,255,255,.35); }
+    .btn-outline:hover { background: rgba(255,255,255,.08); }
+
+    .hero-cards {
+      display: flex; flex-direction: column; gap: 12px;
+    }
+    .hero-card {
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      min-width: 210px;
+    }
+    .hero-card .hc-label { font-size: .7rem; color: rgba(255,255,255,.45); text-transform: uppercase; letter-spacing: .1em; margin-bottom: 4px; }
+    .hero-card .hc-value { font-size: 1rem; font-weight: 600; color: var(--white); }
+    .hero-card .hc-sub { font-size: .78rem; color: rgba(255,255,255,.5); }
+
+    @media (max-width: 760px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-cards { flex-direction: row; flex-wrap: wrap; }
+      .hero-card { min-width: unset; flex: 1 1 140px; }
+    }
+
+    /* ===== STRIP INFOS ===== */
+    #infos {
+      background: var(--lavande);
+      padding: 32px 0;
+    }
+    .infos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 24px;
+    }
+    .info-item { display: flex; align-items: flex-start; gap: 12px; }
+    .info-icon {
+      width: 38px; height: 38px; border-radius: 10px;
+      background: rgba(255,255,255,.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; flex-shrink: 0;
+    }
+    .info-item .info-label { font-size: .7rem; color: rgba(255,255,255,.65); text-transform: uppercase; letter-spacing: .1em; }
+    .info-item .info-val { font-size: .92rem; font-weight: 600; color: var(--white); }
+
+    /* ===== OBJECTIFS ===== */
+    .obj-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+    .obj-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      transition: box-shadow .2s, transform .2s;
+    }
+    .obj-card:hover { box-shadow: var(--shadow); transform: translateY(-3px); }
+    .obj-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem; font-weight: 700;
+      color: var(--lavande-pale);
+      line-height: 1; margin-bottom: 14px;
+    }
+    .obj-card p { font-size: .92rem; color: var(--ink-light); }
+
+    /* ===== AMONT ===== */
+    .amont-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+    }
+    .amont-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      padding: 28px 24px;
+      position: relative;
+      overflow: hidden;
+    }
+    .amont-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 4px;
+    }
+    .amont-card:nth-child(1)::before { background: var(--lavande); }
+    .amont-card:nth-child(2)::before { background: var(--turquoise); }
+    .amont-card:nth-child(3)::before { background: var(--orange); }
+    .amont-card:nth-child(4)::before { background: var(--rose); }
+    .amont-step {
+      font-size: .7rem; font-weight: 600; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--ink-light); margin-bottom: 8px;
+    }
+    .amont-card p { font-size: .9rem; color: var(--ink-light); margin-top: 8px; }
+    .alert-box {
+      background: var(--lavande-pale);
+      border-left: 4px solid var(--lavande);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 18px 22px;
+      margin-top: 32px;
+      font-size: .92rem; color: var(--ink);
+    }
+    .alert-box strong { color: var(--lavande); }
+
+    /* ===== PROGRAMME ACCORDÉON ===== */
+    .programme-tabs {
+      display: flex; gap: 10px; margin-bottom: 28px; flex-wrap: wrap;
+    }
+    .prog-tab {
+      padding: 9px 20px; border-radius: 100px;
+      font-size: .85rem; font-weight: 600;
+      border: 1.5px solid var(--border);
+      background: var(--white);
+      color: var(--ink-light);
+      cursor: pointer; transition: all .2s;
+    }
+    .prog-tab.active { background: var(--ink); color: var(--white); border-color: var(--ink); }
+
+    .prog-day { display: none; }
+    .prog-day.active { display: block; }
+
+    .day-header {
+      background: var(--ink);
+      color: var(--white);
+      border-radius: var(--radius) var(--radius) 0 0;
+      padding: 24px 28px;
+      display: flex; align-items: center; gap: 16px;
+    }
+    .day-date {
+      font-size: .75rem; font-weight: 500;
+      background: rgba(255,255,255,.15);
+      border-radius: 100px;
+      padding: 4px 12px;
+      letter-spacing: .05em;
+    }
+    .day-header h3 { font-size: 1.3rem; color: var(--white); margin: 0; }
+    .day-header p { font-size: .88rem; color: rgba(255,255,255,.6); margin-top: 2px; }
+
+    .accordion { border: 1px solid var(--border); border-top: none; border-radius: 0 0 var(--radius) var(--radius); overflow: hidden; }
+    .acc-item { border-bottom: 1px solid var(--border); }
+    .acc-item:last-child { border-bottom: none; }
+    .acc-trigger {
+      width: 100%; text-align: left;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 24px;
+      background: var(--white);
+      border: none; cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      font-size: .97rem; font-weight: 600;
+      color: var(--ink);
+      transition: background .15s;
+    }
+    .acc-trigger:hover { background: var(--off-white); }
+    .acc-trigger .time-badge {
+      font-size: .72rem; font-weight: 500;
+      background: var(--lavande-pale);
+      color: var(--lavande);
+      border-radius: 100px;
+      padding: 3px 10px;
+      margin-right: 12px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .acc-trigger .chevron {
+      width: 22px; height: 22px; border-radius: 50%;
+      background: var(--off-white);
+      display: flex; align-items: center; justify-content: center;
+      font-size: .8rem; flex-shrink: 0;
+      transition: transform .25s;
+    }
+    .acc-trigger[aria-expanded="true"] .chevron { transform: rotate(180deg); }
+    .acc-trigger[aria-expanded="true"] { background: var(--lavande-pale); }
+    .acc-body {
+      display: none;
+      padding: 0 24px 20px 24px;
+      background: var(--lavande-pale);
+    }
+    .acc-body.open { display: block; }
+    .acc-body ul { list-style: none; padding: 0; }
+    .acc-body ul li {
+      padding: 6px 0 6px 18px;
+      position: relative;
+      font-size: .9rem; color: var(--ink-light);
+      border-bottom: 1px solid rgba(141,157,202,.15);
+    }
+    .acc-body ul li:last-child { border-bottom: none; }
+    .acc-body ul li::before {
+      content: '→';
+      position: absolute; left: 0;
+      color: var(--lavande); font-size: .75rem;
+    }
+    .acc-body .note {
+      margin-top: 12px;
+      font-size: .82rem;
+      color: var(--lavande);
+      font-style: italic;
+    }
+
+    /* ===== LIEU ===== */
+    .lieux-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 28px;
+    }
+    .lieu-card {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+    .lieu-map {
+      width: 100%; height: 220px; border: none; display: block;
+    }
+    .lieu-info { padding: 22px 24px; }
+    .lieu-info h3 { font-size: 1.1rem; margin-bottom: 4px; }
+    .lieu-info .lieu-date {
+      font-size: .75rem; font-weight: 600; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--lavande); margin-bottom: 10px;
+    }
+    .lieu-info address {
+      font-style: normal; font-size: .88rem; color: var(--ink-light); line-height: 1.6;
+    }
+    .lieu-info .maps-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      margin-top: 12px;
+      font-size: .82rem; font-weight: 600;
+      color: var(--lavande); text-decoration: none;
+    }
+    .lieu-info .maps-link:hover { text-decoration: underline; }
+
+    /* ===== VIDÉOS ===== */
+    .videos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 32px;
+    }
+    .video-block h3 { margin-bottom: 6px; font-size: 1.1rem; }
+    .video-block p { font-size: .88rem; color: var(--ink-light); margin-bottom: 14px; }
+    .video-wrap {
+      position: relative; width: 100%; padding-top: 56.25%;
+      border-radius: var(--radius); overflow: hidden;
+      background: var(--ink); box-shadow: var(--shadow-lg);
+    }
+    .video-wrap iframe {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%; border: none;
+    }
+    .diag-link-box {
+      margin-top: 16px;
+      background: var(--lavande-pale);
+      border: 1.5px solid var(--lavande-light);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      flex-wrap: wrap;
+    }
+    .diag-link-box span { font-size: .88rem; color: var(--ink); }
+    .diag-link-box a {
+      background: var(--lavande);
+      color: var(--white);
+      padding: 8px 18px;
+      border-radius: 100px;
+      font-size: .82rem; font-weight: 600;
+      text-decoration: none;
+      transition: background .2s;
+    }
+    .diag-link-box a:hover { background: var(--ink); }
+
+    /* ===== TÉLÉCHARGEMENTS ===== */
+    .dl-grid {
+      display: flex; gap: 16px; flex-wrap: wrap;
+    }
+    .dl-btn {
+      display: flex; align-items: center; gap: 12px;
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px 24px;
+      text-decoration: none; color: var(--ink);
+      transition: box-shadow .2s, border-color .2s;
+    }
+    .dl-btn:hover { box-shadow: var(--shadow); border-color: var(--lavande); }
+    .dl-icon {
+      width: 44px; height: 44px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; flex-shrink: 0;
+    }
+    .dl-icon.pdf { background: #fdf0f2; }
+    .dl-icon.xls { background: #eef8f1; }
+    .dl-btn strong { font-size: .9rem; display: block; }
+    .dl-btn span { font-size: .78rem; color: var(--ink-light); }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--ink);
+      color: rgba(255,255,255,.7);
+      padding: 48px 0 32px;
+    }
+    .footer-inner {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 40px; align-items: start;
+    }
+    footer h4 { font-family: 'Playfair Display', serif; color: var(--white); margin-bottom: 10px; }
+    footer p, footer a { font-size: .88rem; color: rgba(255,255,255,.6); text-decoration: none; }
+    footer a:hover { color: var(--lavande-light); }
+    .footer-divider { border: none; border-top: 1px solid rgba(255,255,255,.1); margin: 28px 0 16px; }
+    .footer-bottom { font-size: .78rem; color: rgba(255,255,255,.35); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+    @media (max-width: 600px) {
+      .footer-inner { grid-template-columns: 1fr; }
+    }
+
+    /* ===== FADE-IN ===== */
+    .fade-in {
+      opacity: 0; transform: translateY(18px);
+      transition: opacity .5s ease, transform .5s ease;
+    }
+    .fade-in.visible { opacity: 1; transform: none; }
+  </style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<nav>
+  <div class="nav-inner">
+    <a href="#hero" class="nav-logo" style="display:flex;align-items:center;gap:10px;text-decoration:none;">
+      <img src="logo.png" alt="Valeurs &amp; Talents" onerror="this.style.display='none'" />
+      <span>Valeurs &amp; Talents</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#objectifs">Objectifs</a></li>
+      <li><a href="#amont">Préparation</a></li>
+      <li><a href="#programme">Programme</a></li>
+      <li><a href="#lieux">Lieux</a></li>
+      <li><a href="#videos">Vidéos &amp; Diag</a></li>
+      <li><a href="#telechargements">Docs</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section id="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-text fade-in">
+        <div class="hero-badge"><span></span>UCO · Formation Management</div>
+        <h1>Les Fondamentaux<br /><em>approfondis</em></h1>
+        <p class="hero-sub">Saison 2 — Pour managers de proximité ayant validé la Saison 1. Deux journées intensives pour passer du pilotage au management réel.</p>
+        <div class="hero-ctas">
+          <a href="#programme" class="btn btn-primary">Voir le programme</a>
+          <a href="#amont" class="btn btn-outline">Préparer ma formation</a>
+        </div>
+      </div>
+      <div class="hero-cards fade-in">
+        <div class="hero-card">
+          <div class="hc-label">Journée 1</div>
+          <div class="hc-value">9 juin 2026</div>
+          <div class="hc-sub">Mardi · Bouchemaine</div>
+        </div>
+        <div class="hero-card">
+          <div class="hc-label">Journée 2</div>
+          <div class="hc-value">1er juillet 2026</div>
+          <div class="hc-sub">Mercredi · Les Ponts-de-Cé</div>
+        </div>
+        <div class="hero-card">
+          <div class="hc-label">Horaires</div>
+          <div class="hc-value">9h00 – 17h00</div>
+          <div class="hc-sub">Café d'accueil dès 8h40</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STRIP INFOS ===== -->
+<div id="infos">
+  <div class="container">
+    <div class="infos-grid">
+      <div class="info-item">
+        <div class="info-icon">👥</div>
+        <div><div class="info-label">Groupe</div><div class="info-val">5 à 10 participants</div></div>
+      </div>
+      <div class="info-item">
+        <div class="info-icon">🎓</div>
+        <div><div class="info-label">Prérequis</div><div class="info-val">Avoir suivi la Saison 1</div></div>
+      </div>
+      <div class="info-item">
+        <div class="info-icon">⚖️</div>
+        <div><div class="info-label">Format</div><div class="info-val">40% théorie · 60% pratique</div></div>
+      </div>
+      <div class="info-item">
+        <div class="info-icon">✅</div>
+        <div><div class="info-label">Certification</div><div class="info-val">Organisme certifié Qualiopi</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== OBJECTIFS ===== -->
+<section id="objectifs">
+  <div class="container fade-in">
+    <span class="label">Objectifs pédagogiques</span>
+    <h2>Ce que vous saurez faire</h2>
+    <p class="section-intro">À l'issue des deux journées, chaque participant repart avec des outils concrets et immédiatement actionnables dans son quotidien de manager.</p>
+    <div class="obj-grid">
+      <div class="obj-card">
+        <div class="obj-number">01</div>
+        <h3>Réancrer les 5 principes</h3>
+        <p>Consolider parler vrai, but commun, organisation, faire grandir et temps de chef dans les pratiques quotidiennes.</p>
+      </div>
+      <div class="obj-card">
+        <div class="obj-number">02</div>
+        <h3>Analyser les situations complexes</h3>
+        <p>Discernement, escalade, prise de décision en contexte difficile — identifier les bonnes réponses managériales.</p>
+      </div>
+      <div class="obj-card">
+        <div class="obj-number">03</div>
+        <h3>Maîtriser des techniques clés</h3>
+        <p>Savoir dire non, poser un cadre, gérer ses émotions, recadrer et accompagner avec des outils immédiatement actionnables.</p>
+      </div>
+      <div class="obj-card">
+        <div class="obj-number">04</div>
+        <h3>Passer du pilotage au management</h3>
+        <p>Responsabiliser plutôt que diriger — lâcher prise sans perdre le contrôle et sortir du pilotage des urgences.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== AMONT ===== -->
+<section id="amont">
+  <div class="container fade-in">
+    <span class="label">En amont · Avant le 15 mai</span>
+    <h2>Préparez votre formation</h2>
+    <p class="section-intro">Vous arriverez « armé » pour maximiser le temps d'apprentissage collectif. Quatre démarches simples à réaliser avant J1.</p>
+    <div class="amont-grid">
+      <div class="amont-card">
+        <div class="amont-step">Étape 1</div>
+        <h3>🔍 Autodiagnostic managérial</h3>
+        <p>Questionnaire de diagnostic des 5 principes. Autoévaluation individuelle + interrogation anonyme de votre équipe. Lien fourni ci-dessous dans la section Vidéos.</p>
+      </div>
+      <div class="amont-card">
+        <div class="amont-step">Étape 2</div>
+        <h3>💎 Pépites &amp; cailloux</h3>
+        <p>Demandez à votre équipe ses 3 fiertés et ses 3 points d'amélioration. Langage simple, sans jargon — ces éléments alimenteront les ateliers.</p>
+      </div>
+      <div class="amont-card">
+        <div class="amont-step">Étape 3</div>
+        <h3>🤝 Alignement N+1</h3>
+        <p>Rencontrez votre responsable direct : « Quelle est votre vision de mon équipe ? Sur quoi pensez-vous que je dois progresser ? »</p>
+      </div>
+      <div class="amont-card">
+        <div class="amont-step">Étape 4</div>
+        <h3>📝 Cas pratiques personnels</h3>
+        <p>Préparez 1 à 2 situations managériales réelles — difficiles ou mal gérées, avec faits et contexte précis. Ces cas alimenteront le carrousel.</p>
+      </div>
+    </div>
+    <div class="alert-box">
+      <strong>Point de vigilance :</strong> L'objectif n'est pas de vous surcharger mais de vous permettre d'arriver avec du grain à moudre. C'est <strong>une occasion de grandir et de prendre du recul</strong> sur votre pratique managériale.
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROGRAMME ===== -->
+<section id="programme">
+  <div class="container fade-in">
+    <span class="label">Programme détaillé</span>
+    <h2>Les deux journées</h2>
+    <p class="section-intro">Matinées théoriques et rappels — après-midis entièrement consacrés à la pratique en mode action.</p>
+
+    <div class="programme-tabs">
+      <button class="prog-tab active" onclick="switchDay(0)">Journée 1 — 9 juin</button>
+      <button class="prog-tab" onclick="switchDay(1)">Journée 2 — 1er juillet</button>
+    </div>
+
+    <!-- J1 -->
+    <div class="prog-day active" id="day-0">
+      <div class="day-header">
+        <div>
+          <div class="day-date">Mardi 9 juin 2026 · Bouchemaine</div>
+          <h3>Diagnostic partagé &amp; réancrage des fondamentaux</h3>
+          <p>Restituer, partager, réancrer les 5 principes — puis travailler les situations complexes</p>
+        </div>
+      </div>
+      <div class="accordion">
+        <div class="acc-item">
+          <button class="acc-trigger" onclick="toggleAcc(this)" aria-expanded="false">
+            <span style="display:flex;align-items:center;gap:10px;"><span class="time-badge">8h40</span>Café d'accueil</span>
+            <span class="chevron">▾</span>
+          </button>
+          <div class="acc-body">
+            <ul><li>Accueil des participants et installation</li><li>Moment informel de mise en contact</li></ul>
+          </div>
+        </div>
+        <div class="acc-item">
+          <button class="acc-trigger" onclick="toggleAcc(this)" aria-expanded="false">
+            <span style="display:flex;align-items:center;gap:10px;"><span class="time-badge">9h00 – 9h30</span>Accueil &amp; tour de table</span>
+            <span class="chevron">▾</span>
+          </button>
+          <div class="acc-body">
+            <ul>
+              <li>Présentation du programme Saison 2</li>
+              <li>Tour de table rapide : votre équipe, une attente</li>
+              <li>Setting collectif : bienveillance, confidentialité, sans jugement</li>
+            </ul>
+          </div>
+        </div>
+        <div class="acc-item">
+          <button class="acc-trigger" onclick="toggleAcc(this)" aria-expanded="false">
+            <span style="display:flex;align-items:center;gap:10px;"><span class="time-badge">9h30 – 10h15</span>Diagnostic partagé</span>
+            <span class="chevron">▾</span>
+          </button>
+          <div class="acc-body">
+            <ul>
+              <li>Restitution des scores d'autodiagnostic (manager vs équipe)</li>
+              <li>Partage des pépites et cailloux par les participants</li>
+              <li>Identification des patterns communs et enjeux prioritaires</li>
+            </ul>
+            <p class="note">Format : tour de table + tableau blanc. Animation : Mickaël.</p>
+          </div>
+        </div>
+        <div class="acc-item">
+          <button class="acc-trigger" onclick="toggleAcc(this)" aria-expanded="false">
+            <span style="display:flex;align-items:center;gap:10px;"><span class="time-badge">10h15 – 11h00</span>Réancrage des 5 principes</span>
+            <span class="chevron">▾</span>
+          </button>
+          <div class="acc-body">
+            <ul>
+              <li>Principe 1 · Parler vrai — Libérer la parole, supprimer les non-dits</li>
+              <li>Principe 2 · Raison d'être — Objectifs SMART connectés au sens</li>
+              <li>Principe 3 · Organisation — Responsabiliser, clarifier les rôles</li>
+              <li>Principe 4 · Faire grandir — Feedback, bilatérales, développement</li>
+              <li>Principe 5 · Temps de chef — Piloter plutôt que gérer l'urgence</li>
+            </ul>
+            <p class="note">Format : apports + questions. Animation : Mickaël.</p>
+          </div>
+        </div>
+        <div class="acc-item">
+          <button class="acc-trigger" onclick="toggleAcc(this)" aria-expanded="false">
+            <span style="display:flex;align-items:center;gap:10px;"><span class="time-badge">11h00 – 11h15</span>☕ Pause café</span>
+            <span class="chevron">▾</span>
+          </button>
+          <div class="acc-body"><ul><li>Pause et moment d'échange informel</li></ul></div>
+        </div>
+        <div class="acc-item">
+          <button class="acc-trigger" onclick="toggleAcc(this)" aria-expanded="false">
+            <span style="display:flex;align-items:center;gap:10px;"><span class="time-badge">12h30 – 13h30</span>🍽️ Déjeuner</span>
+            <span class="chevron">▾</span>
+          </button>
+          <div class="acc-body"><ul><li>Pause déjeuner — moment de convivialité</li></ul></div>
+        </div>
+        <div class="acc-item">
+          <button class="acc-trigger" onclick="toggleAcc(this)" aria-expanded="false">
+            <span style="display:flex;align-items:center;gap:10px;"><span class="time-badge">13h30 – 17h00</span>Classe inversée — Situations complexes</span>
+            <span class="chevron">▾</span>
+          </button>
+          <div class="acc-body">
+            <ul>
+              <li><strong>Thème 1 · Discernement et escalade</strong> — Quand gérer seul ? Quand escalader ou demander de l'aide ?</li>
+              <li><strong>Thème 2 · Prise de décision complexe</strong> — Urgence vs importance, enjeux, bonnes personnes à consulter</li>
+              <li><strong>Thème 3 · Responsabiliser sans lâcher le contrôle</strong> — Déléguer, clarifier les limites, poser un cadre</li>
+            </ul>
+            <p class="note">Déroulé : présentation du sujet (5 min) → sous-groupes (40 min) → restitution + débat (20 min) → fiches outils Mickaël (15 min). Outils : matrice Eisenhower, 3 cercles de pouvoir, IFAST.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- J2 -->
+    <div class="prog-day" id="day-1">
+      <div class="day-header">
+        <div>
+          <div class="day-date">Mercredi 1er juillet 2026 · Les Ponts-de-Cé</div>
+          <h3>Compétences avancées &amp; mises en situation pratiques</h3>
+          <p>Apports complémentaires le matin — carrousel de 6 scénarios l'après-midi</p>
+        </div>
+      </div>
+      <div class="accordion">
+        <div class="acc-item">
+          <button class="acc-trigger" onclick="toggleAcc(this)" aria-expanded="false">
+            <span style="display:flex;align-items:center;gap:10px;"><span class="time-badge">8h40</span>Café d'accueil</span>
+            <span class="chevron">▾</span>
+          </button>
+          <div class="acc-body"><ul><li>Accueil et mise en route</li></ul></div>
+        </div>
+        <div class="acc-item">
+          <button class="acc-trigger" onclick="toggleAcc(this)" aria-expanded="false">
+            <span style="display:flex;align-items:center;gap:10px;"><span class="time-badge">9h00 – 12h30</span>Apports complémentaires</span>
+            <span class="chevron">▾</span>
+          </button>
+          <div class="acc-body">
+            <ul>
+              <li>Management situationnel — Adapter son style (directif, coaché, participatif, délégué)</li>
+              <li>Assertivité managériale — Autorité sans autoritarisme, rester juste et ferme</li>
+              <li>Gestion des émotions — Reconnaître, gérer, rester lucide en situation délicate</li>
+              <li>Priorisation — Matrice Eisenhower pour sortir de l'urgence permanente</li>
+              <li>Manager des profils différents — Personnalités, cultures, générations</li>
+              <li>Entretien annuel — Rester juste et clair dans les situations délicates</li>
+            </ul>
+            <p class="note">Modalités : apports théoriques courts (10-15 min/thème) + illustration par des cas UCO + fiches outils.</p>
+          </div>
+        </div>
+        <div class="acc-item">
+          <button class="acc-trigger" onclick="toggleAcc(this)" aria-expanded="false">
+            <span style="display:flex;align-items:center;gap:10px;"><span class="time-badge">12h30 – 13h30</span>🍽️ Déjeuner</span>
+            <span class="chevron">▾</span>
+          </button>
+          <div class="acc-body"><ul><li>Pause déjeuner</li></ul></div>
+        </div>
+        <div class="acc-item">
+          <button class="acc-trigger" onclick="toggleAcc(this)" aria-expanded="false">
+            <span style="display:flex;align-items:center;gap:10px;"><span class="time-badge">13h30 – 17h00</span>🎲 Carrousel de mises en situation</span>
+            <span class="chevron">▾</span>
+          </button>
+          <div class="acc-body">
+            <ul>
+              <li><strong>Station 1 · Dire non</strong> — Un collaborateur veut partir en juin, ce n'est pas possible. Comment le gérer ?</li>
+              <li><strong>Station 2 · Recadrer fermement</strong> — Un collaborateur ne respecte pas le cadre. Intervenir sans casser la relation.</li>
+              <li><strong>Station 3 · Entretien annuel difficile</strong> — Annoncer que le collaborateur n'est pas au niveau pour une mobilité ou augmentation.</li>
+              <li><strong>Station 4 · Tension relationnelle</strong> — Deux membres de votre équipe sont en conflit. Comment intervenir ?</li>
+              <li><strong>Station 5 · Accompagner en difficulté</strong> — Un collaborateur montre des signes de démotivation. Comment creuser sans être intrusif ?</li>
+              <li><strong>Station 6 · Déléguer et responsabiliser</strong> — Vous voulez que votre équipe prenne plus d'initiatives. Comment y aller ?</li>
+            </ul>
+            <p class="note">Déroulé : groupes de 2-3 personnes · 15 min par station · restitution + débat · fiche outils avec phrases-clés.</p>
+          </div>
+        </div>
+        <div class="acc-item">
+          <button class="acc-trigger" onclick="toggleAcc(this)" aria-expanded="false">
+            <span style="display:flex;align-items:center;gap:10px;"><span class="time-badge">~17h00</span>🎯 Clôture &amp; feedback final</span>
+            <span class="chevron">▾</span>
+          </button>
+          <div class="acc-body">
+            <ul>
+              <li>Tour de table : « Qu'emportes-tu ? Qu'as-tu appris sur toi ? »</li>
+              <li>Présentation de la J3 optionnelle</li>
+              <li>Engagements individuels de mise en pratique</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LIEUX ===== -->
+<section id="lieux">
+  <div class="container fade-in">
+    <span class="label">Lieux de formation</span>
+    <h2>Deux cadres pour apprendre</h2>
+    <p class="section-intro">Des lieux choisis pour favoriser la prise de recul, loin du quotidien professionnel. Pas besoin de voiture — les accès sont facilités.</p>
+    <div class="lieux-grid">
+      <div class="lieu-card">
+        <iframe class="lieu-map"
+          src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU2s4o&q=Domaine+des+3+villages+700+route+de+la+Moncellière+49080+Bouchemaine"
+          allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+          title="Domaine des 3 Villages — Bouchemaine">
+        </iframe>
+        <div class="lieu-info">
+          <div class="lieu-date">Journée 1 · Mardi 9 juin 2026</div>
+          <h3>Domaine des 3 Villages</h3>
+          <address>700 route de la Moncellière<br />Lieu-dit La Piverdière<br />49080 Bouchemaine</address>
+          <a href="https://maps.google.com/?q=700+route+de+la+Moncelière+49080+Bouchemaine" target="_blank" rel="noopener" class="maps-link">📍 Ouvrir dans Google Maps</a>
+        </div>
+      </div>
+      <div class="lieu-card">
+        <iframe class="lieu-map"
+          src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU2s4o&q=Château+de+Belle-Poule+Levée+de+Belle-Poule+49130+Les+Ponts-de-Cé"
+          allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+          title="Château de Belle-Poule — Les Ponts-de-Cé">
+        </iframe>
+        <div class="lieu-info">
+          <div class="lieu-date">Journée 2 · Mercredi 1er juillet 2026</div>
+          <h3>Château de Belle-Poule</h3>
+          <address>Levée de Belle-Poule<br />49130 Les Ponts-de-Cé</address>
+          <a href="https://maps.google.com/?q=Levée+de+Belle-Poule+49130+Les+Ponts-de-Cé" target="_blank" rel="noopener" class="maps-link">📍 Ouvrir dans Google Maps</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== VIDÉOS ===== -->
+<section id="videos">
+  <div class="container fade-in">
+    <span class="label">Ressources vidéo</span>
+    <h2>Deux vidéos pour démarrer</h2>
+    <p class="section-intro">Regardez ces deux vidéos avant votre J1 pour arriver en condition optimale.</p>
+    <div class="videos-grid">
+      <div class="video-block">
+        <h3>🎬 Présentation de la formation</h3>
+        <p>Mickaël vous présente les objectifs, la philosophie et ce que vous allez vivre pendant ces deux journées.</p>
+        <div class="video-wrap">
+          <iframe src="https://www.youtube.com/embed/M1XomJhSe1g"
+            title="Présentation de la formation Management Saison 2"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen loading="lazy">
+          </iframe>
+        </div>
+      </div>
+      <div class="video-block">
+        <h3>🧭 Comment utiliser l'autodiagnostic</h3>
+        <p>Mode d'emploi de l'outil de diagnostic managérial — à réaliser <strong>avant le 15 mai</strong> en amont de la formation.</p>
+        <div class="video-wrap">
+          <iframe src="https://www.youtube.com/embed/JiyP_uATaEI"
+            title="Comment utiliser l'outil d'autodiagnostic"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen loading="lazy">
+          </iframe>
+        </div>
+        <div class="diag-link-box">
+          <span>🔗 Accéder à l'application d'autodiagnostic managérial</span>
+          <a href="https://syncora-lead-path.base44.app" target="_blank" rel="noopener">Ouvrir l'outil</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+<!-- ===== TÉLÉCHARGEMENTS ===== -->
+<section id="telechargements">
+  <div class="container fade-in">
+    <span class="label">Documents</span>
+    <h2>Téléchargements</h2>
+    <p class="section-intro">Retrouvez ici tous les documents utiles avant et pendant la formation.</p>
+    <div class="dl-grid">
+      <a href="programme.pdf" download class="dl-btn">
+        <div class="dl-icon pdf">📄</div>
+        <div>
+          <strong>Programme de formation</strong>
+          <span>programme.pdf — Détail complet des deux journées</span>
+        </div>
+      </a>
+      <a href="Questionnaire_Diag_Equipe_v4.xlsx" download class="dl-btn">
+        <div class="dl-icon xls">📊</div>
+        <div>
+          <strong>Questionnaire diagnostic équipe</strong>
+          <span>Questionnaire_Diag_Equipe_v4.xlsx — Outil d'autodiagnostic</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div>
+        <h4>Valeurs &amp; Talents</h4>
+        <p>Formation · Coaching · Conseil RH</p>
+        <p style="margin-top:16px;">
+          <strong style="color:rgba(255,255,255,.8);">Mickaël Loeuille</strong><br />
+          📞 <a href="tel:0681255388">06 81 25 53 88</a><br />
+          ✉️ <a href="mailto:mickael.loeuille@gmail.com">mickael.loeuille@gmail.com</a>
+        </p>
+      </div>
+      <div>
+        <h4>Pour les participants UCO</h4>
+        <p>Toute question sur l'inscription ou la logistique :<br />
+        contactez votre référent RH.</p>
+        <p style="margin-top:16px;">
+          <a href="#">Politique d'inclusion et gestion du handicap</a>
+        </p>
+      </div>
+    </div>
+    <hr class="footer-divider" />
+    <div class="footer-bottom">
+      <span>© 2026 Valeurs &amp; Talents — Organisme certifié Qualiopi</span>
+      <span>Formation Management UCO · Saison 2</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Tabs programme
+  function switchDay(index) {
+    document.querySelectorAll('.prog-day').forEach((d, i) => {
+      d.classList.toggle('active', i === index);
+    });
+    document.querySelectorAll('.prog-tab').forEach((t, i) => {
+      t.classList.toggle('active', i === index);
+    });
+  }
+
+  // Accordéon
+  function toggleAcc(trigger) {
+    const body = trigger.nextElementSibling;
+    const isOpen = body.classList.contains('open');
+    // Fermer tous les ouverts dans le même accordion
+    trigger.closest('.accordion').querySelectorAll('.acc-body.open').forEach(b => {
+      b.classList.remove('open');
+      b.previousElementSibling.setAttribute('aria-expanded', 'false');
+    });
+    if (!isOpen) {
+      body.classList.add('open');
+      trigger.setAttribute('aria-expanded', 'true');
+    }
+  }
+
+  // Fade-in au scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
